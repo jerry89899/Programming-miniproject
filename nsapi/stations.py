@@ -1,22 +1,56 @@
 import config
 import requests
+from requests import HTTPError
 import xmltodict
+from errorHandling import NSException, checkForError
 
-auth_details = ("jerrylooman87@gmail.com", "ox8ZKmRylP2hf71QCmuq-3_XcKp_iemmoOJFTgyVRaRkDdiZw1d4Fg")
+def getDepartures(station):
+	"""
+	Haalt alle vertrekkende treinen op van het opgegeven station.
+	"""
+	departures = []
+	url = config.buildURL("ActueleVertrekTijden", {"station": station})
+	
+	response = requests.get(url, auth = config.authDetails)
+	xml = xmltodict.parse(response.text)
 
+	checkForError(url, xml)
 
-api_url = "http://webservices.ns.nl/ns-api-avt?station=ut"
+	for vertrek in xml["ActueleVertrekTijden"]["VertrekkendeTrein"]:
+		# De volgende waarden zijn altijd beschikbaar
+		departure = {
+			"RideNumber": vertrek["RitNummer"],
+			"DepartureTime": vertrek["VertrekTijd"][11:16],
+			"DepartureDate": vertrek["VertrekTijd"][0:10],
+			"Destination": vertrek["EindBestemming"],
+			"TrainType": vertrek["TreinSoort"],
+			"Transporter": vertrek["Vervoerder"],
+			"DeparturePlatform": vertrek["VertrekSpoor"]["#text"],
+			"DeparturePlatformChanged": vertrek["VertrekSpoor"]["@wijziging"]	
+		}
 
+		# De volgende waarden zijn niet altijd beschikbaar
+		if "VertrekVertraging" in vertrek:
+			departure["DepartureDelay"] = vertrek["VertrekVertraging"]
 
-response = requests.get(api_url, auth = auth_details)
-vertrekXML = xmltodict.parse(response.text)
+		if "VertrekVertragingTekst" in vertrek:
+			departure["DepartureDelayText"] = vertrek["VertrekVertragingTekst"]
 
+		if "RouteTekst" in vertrek:
+			departure["RouteText"] = vertrek["RouteTekst"]
 
+		if "ReisTip" in vertrek:
+			departure["TravelTip"] = vertrek["ReisTip"]
 
-print("Dit zijn de vertrekkende treinen:")
+		if "Opmerkingen" in vertrek:
+			departure["Comments"] = vertrek["Opmerkingen"] 
 
-for vertrek in vertrekXML["ActueleVertrekTijden"]["VertrekkendeTrein"]:
-	eindbestemming = vertrek["EindBestemming"]
-	vertrektijd = vertrek["VertrekTijd"] # 2016-09-27T18:36:00+0200
-	vertrektijd = vertrektijd[11:16] # 18:36
-	print("Om " + vertrektijd + " vertrekt een trein naar " + eindbestemming)
+		departures.append(departure)
+	return departures
+
+try:
+	print(getDepartures("Utrecht Centraal"))
+except requests.exceptions.ConnectionError as e:
+	print("Je bent offline!")
+except NSException as e:
+	print(str(e))

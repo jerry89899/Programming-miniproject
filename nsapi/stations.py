@@ -1,6 +1,5 @@
 import config
 import requests
-from requests import HTTPError
 import xmltodict
 from errorHandling import NSException, checkForError
 

@@ -1,5 +1,3 @@
-# dependencies: python-dateutil, httplib2
-
 import nsapi
 
 username = "jerrylooman87@gmail.com"

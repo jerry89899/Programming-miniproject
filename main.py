@@ -1,7 +1,47 @@
-from nsapi import config, stations
+import tkinter as tk
+from search import searchScreen
 
-username = "jerrylooman87@gmail.com"
-password = "ox8ZKmRylP2hf71QCmuq-3_XcKp_iemmoOJFTgyVRaRkDdiZw1d4Fg"
+class mainScreen():
+	root = None
+	bottomFrame = None
+	
+	# Frames
+	mainFrame = None
+	
+	# Buttons
+	buttonA = None
 
-nsapi.setUsername(username)
-nsapi.setPassword(password)
+	def __init__(self, root):
+		self.root = root
+
+		self.mainFrame = tk.Frame(self.root)
+		self.topFrame = tk.Frame(self.mainFrame, background = "#FFD61E")
+
+		self.bottomFrame = tk.Frame(self.mainFrame, background = "#FFD61E")
+
+		self.buttonA = tk.Button(self.topFrame, text = "Actuele vertrektijden", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.openSearch)
+
+	def openSearch(self):
+		self.hide()
+		searchScreen(self.root).show(self)
+
+	def show(self, returnScreen = None):
+		self.returnScreen = returnScreen
+		
+		self.mainFrame.pack(fill = tk.BOTH, expand = True)
+		self.topFrame.pack(side = tk.TOP, fill = tk.BOTH)
+		
+		self.bottomFrame.pack(side = tk.TOP, fill = tk.BOTH, expand = True)
+
+		self.buttonA.pack(pady = 20, padx = (20, 0), side = tk.LEFT)
+
+	def hide(self):
+		self.mainFrame.pack_forget()
+		self.topFrame.pack_forget()
+
+		self.bottomFrame.pack_forget()
+
+		self.buttonA.pack_forget()
+
+		if self.returnScreen != None:
+			self.returnScreen.show()

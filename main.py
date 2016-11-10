@@ -37,11 +37,6 @@ class mainScreen():
 
 	def hide(self):
 		self.mainFrame.pack_forget()
-		self.topFrame.pack_forget()
-
-		self.bottomFrame.pack_forget()
-
-		self.buttonA.pack_forget()
 
 		if self.returnScreen != None:
 			self.returnScreen.show()

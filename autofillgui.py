@@ -3,7 +3,6 @@ import re
 
 class AutocompleteEntry(Entry):
     def __init__(self, lista, *args, **kwargs):
-        
         Entry.__init__(self, *args, **kwargs)
         self.lista = lista        
         self.var = self["textvariable"]
@@ -18,7 +17,6 @@ class AutocompleteEntry(Entry):
         self.lb_up = False
 
     def changed(self, name, index, mode):  
-
         if self.var.get() == '':
             self.lb.destroy()
             self.lb_up = False
@@ -41,7 +39,6 @@ class AutocompleteEntry(Entry):
                     self.lb_up = False
         
     def selection(self, event):
-
         if self.lb_up:
             self.var.set(self.lb.get(ACTIVE))
             self.lb.destroy()
@@ -49,7 +46,6 @@ class AutocompleteEntry(Entry):
             self.icursor(END)
 
     def up(self, event):
-
         if self.lb_up:
             if self.lb.curselection() == ():
                 index = '0'
@@ -62,7 +58,6 @@ class AutocompleteEntry(Entry):
                 self.lb.activate(index) 
 
     def down(self, event):
-
         if self.lb_up:
             if self.lb.curselection() == ():
                 index = '0'
@@ -75,5 +70,5 @@ class AutocompleteEntry(Entry):
                 self.lb.activate(index) 
 
     def comparison(self):
-        pattern = re.compile('.*' + self.var.get() + '.*')
-        return [w for w in self.lista if re.match(pattern, w)]
+        pattern = re.compile('.*' + self.var.get().lower() + '.*')
+        return [w for w in self.lista if re.match(pattern, w.lower())]

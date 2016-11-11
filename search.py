@@ -11,7 +11,7 @@ class SearchScreen():
 	
 	# Frames
 	primaryFrame = None
-	topFrame = None
+	controlFrame = None
 	resultsFrame = None
 	entry = None
 
@@ -27,14 +27,13 @@ class SearchScreen():
 		self.root = root
 
 		self.primaryFrame = tk.Frame(self.root)
-		self.topFrame = tk.Frame(self.primaryFrame, background = "#FFD61E")
+		self.controlFrame = tk.Frame(self.primaryFrame, background = "#FFD61E")
 		self.resultsFrame = tk.Frame(self.primaryFrame, background = "#FFD61E")
 
-		self.annuleerButton = tk.Button(self.topFrame, text = "Annuleer", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.hide)
-		self.buttonA = tk.Button(self.topFrame, text = "Dit station", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold")
-		self.buttonB = tk.Button(self.topFrame, text = "Ander station", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.open_station_selector)
+		self.annuleerButton = tk.Button(self.controlFrame, text = "Annuleer", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.hide)
+		self.buttonA = tk.Button(self.controlFrame, text = "Ander station", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.open_station_selector)
 
-		self.entry = tk.Entry(self.topFrame, width=50)
+		self.entry = tk.Entry(self.controlFrame, width=50)
 
 		self.multiColumnListBox = MultiColumnListBox(self.resultsFrame, ["Bestemming", "Spoor","Tijd"])	
 		self.multiColumnListBox.clear()
@@ -51,12 +50,11 @@ class SearchScreen():
 			self.returnScreen = returnScreen
 
 		self.primaryFrame.pack(fill = tk.BOTH, expand = True)
-		self.topFrame.pack(side = tk.TOP, fill = tk.BOTH)
+		self.controlFrame.pack(side = tk.TOP, fill = tk.BOTH)
 		self.resultsFrame.pack(side = tk.TOP, fill = tk.BOTH, expand = True)
 		
 		self.annuleerButton.pack(pady = 20, padx = (20, 0), side = tk.LEFT)
 		self.buttonA.pack(pady = 20, padx = (20, 0), side = tk.LEFT)
-		self.buttonB.pack(pady = 20, padx = (20, 0), side = tk.LEFT)
 	
 		self.entry.pack(side = tk.BOTTOM, pady = (0, 20), padx = (20, 20))
 

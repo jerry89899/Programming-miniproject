@@ -1,7 +1,6 @@
 import tkinter as tk
 from multi_column_list_box import MultiColumnListBox
 from station_selector import SelectorScreen
-from page_stack import stack as page_stack
 
 import nsapi.stations as stations
 

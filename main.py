@@ -1,6 +1,5 @@
 import tkinter as tk
 from search import SearchScreen
-from page_stack import stack as page_stack
 
 class MainScreen():
 	root = None

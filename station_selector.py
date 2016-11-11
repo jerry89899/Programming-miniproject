@@ -1,6 +1,4 @@
 import tkinter as tk
-#from search import SearchScreen
-from page_stack import stack as page_stack
 from all_stations import all_stations as stations
 
 class SelectorScreen():

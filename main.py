@@ -1,34 +1,37 @@
 import tkinter as tk
-from search import searchScreen
+from search import SearchScreen
+from page_stack import stack as page_stack
 
-class mainScreen():
+class MainScreen():
 	root = None
-	bottomFrame = None
+	returnScreen = None
 	
 	# Frames
-	mainFrame = None
-	
+	primaryFrame = None
+	bottomFrame = None
+
 	# Buttons
 	buttonA = None
 
 	def __init__(self, root):
 		self.root = root
+		
+		self.primaryFrame = tk.Frame(self.root)
+		self.topFrame = tk.Frame(self.primaryFrame, background = "#FFD61E")
 
-		self.mainFrame = tk.Frame(self.root)
-		self.topFrame = tk.Frame(self.mainFrame, background = "#FFD61E")
-
-		self.bottomFrame = tk.Frame(self.mainFrame, background = "#FFD61E")
+		self.bottomFrame = tk.Frame(self.primaryFrame, background = "#FFD61E")
 
 		self.buttonA = tk.Button(self.topFrame, text = "Actuele vertrektijden", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.openSearch)
 
 	def openSearch(self):
 		self.hide()
-		searchScreen(self.root).show(self)
+		SearchScreen(self.root).show(self)
 
 	def show(self, returnScreen = None):
-		self.returnScreen = returnScreen
-		
-		self.mainFrame.pack(fill = tk.BOTH, expand = True)
+		if returnScreen != None:
+			self.returnScreen = returnScreen
+
+		self.primaryFrame.pack(fill = tk.BOTH, expand = True)
 		self.topFrame.pack(side = tk.TOP, fill = tk.BOTH)
 		
 		self.bottomFrame.pack(side = tk.TOP, fill = tk.BOTH, expand = True)
@@ -36,7 +39,10 @@ class mainScreen():
 		self.buttonA.pack(pady = 20, padx = (20, 0), side = tk.LEFT)
 
 	def hide(self):
-		self.mainFrame.pack_forget()
+		self._hide()
 
 		if self.returnScreen != None:
 			self.returnScreen.show()
+
+	def _hide(self):
+		self.primaryFrame.pack_forget()

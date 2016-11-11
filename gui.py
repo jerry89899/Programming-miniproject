@@ -1,9 +1,7 @@
-from autofillgui import AutocompleteEntry
 import tkinter as tk
 
 from main import MainScreen
 from search import SearchScreen
-from page_stack import stack as page_stack
 
 root = tk.Tk()
 

@@ -13,10 +13,6 @@ class SearchScreen():
 	primaryFrame = None
 	controlFrame = None
 	resultsFrame = None
-	entry = None
-
-	# Entries
-	entry = None
 	
 	# Buttons
 	annuleerButton = None
@@ -32,8 +28,6 @@ class SearchScreen():
 
 		self.annuleerButton = tk.Button(self.controlFrame, text = "Annuleer", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.hide)
 		self.buttonA = tk.Button(self.controlFrame, text = "Ander station", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.open_station_selector)
-
-		self.entry = tk.Entry(self.controlFrame, width=50)
 
 		self.multiColumnListBox = MultiColumnListBox(self.resultsFrame, ["Bestemming", "Spoor","Tijd"])	
 		self.multiColumnListBox.clear()
@@ -55,8 +49,6 @@ class SearchScreen():
 		
 		self.annuleerButton.pack(pady = 20, padx = (20, 0), side = tk.LEFT)
 		self.buttonA.pack(pady = 20, padx = (20, 0), side = tk.LEFT)
-	
-		self.entry.pack(side = tk.BOTTOM, pady = (0, 20), padx = (20, 20))
 
 	def hide(self):
 		self._hide()

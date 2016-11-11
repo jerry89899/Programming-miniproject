@@ -11,7 +11,7 @@ class MultiColumnListBox:
 	def __init__(self, root, columns):
 		self.tree = None
 		self.columns = columns
-		self.sorted_column = columns[0]
+		self.sorted_column = columns[2]
 		self.root = root
 		self._setup_widgets()
 		self._build_tree()

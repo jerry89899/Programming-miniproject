@@ -17,11 +17,12 @@ class MainScreen():
 		self.root = root
 		
 		self.primaryFrame = tk.Frame(self.root)
-		self.topFrame = tk.Frame(self.primaryFrame, background = "#FFD61E")
 
+		self.topFrame = tk.Frame(self.primaryFrame, background = "#FFD61E")
+		self.middleFrame = tk.Frame(self.primaryFrame, background = "#FFD61E")
 		self.bottomFrame = tk.Frame(self.primaryFrame, background = "#FFD61E")
 
-		self.buttonA = tk.Button(self.topFrame, text = "Actuele vertrektijden", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.openSearch)
+		self.buttonA = tk.Button(self.middleFrame, text = "Actuele vertrektijden", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.openSearch)
 
 	def openSearch(self):
 		self.hide()
@@ -32,11 +33,12 @@ class MainScreen():
 			self.returnScreen = returnScreen
 
 		self.primaryFrame.pack(fill = tk.BOTH, expand = True)
-		self.topFrame.pack(side = tk.TOP, fill = tk.BOTH)
-		
-		self.bottomFrame.pack(side = tk.TOP, fill = tk.BOTH, expand = True)
 
-		self.buttonA.pack(pady = 20, padx = (20, 0), side = tk.LEFT)
+		self.topFrame.pack(side = tk.TOP, fill = tk.BOTH)
+		self.middleFrame.pack(side = tk.LEFT, fill = tk.BOTH, expand = True)
+		self.bottomFrame.pack(side = tk.BOTTOM, fill = tk.BOTH, expand = True)
+
+		self.buttonA.pack(pady = 300, padx = (0, 0), anchor = tk.CENTER)
 
 	def hide(self):
 		self._hide()

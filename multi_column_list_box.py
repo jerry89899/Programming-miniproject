@@ -1,7 +1,7 @@
 import tkinter.font as tkFont
 import tkinter.ttk as ttk
 
-class MultiColumnListbox:
+class MultiColumnListBox:
 	root = None
 	columns = None
 	rows = []

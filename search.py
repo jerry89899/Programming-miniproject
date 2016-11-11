@@ -25,8 +25,16 @@ class SearchScreen():
 		self.controlFrame = tk.Frame(self.primaryFrame, background = "#FFD61E")
 		self.resultsFrame = tk.Frame(self.primaryFrame, background = "#FFD61E")
 
+<<<<<<< HEAD
 		self.annuleerButton = tk.Button(self.controlFrame, text = "Annuleer", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.hide)
 		self.buttonA = tk.Button(self.controlFrame, text = "Ander station", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.open_station_selector)
+=======
+		self.annuleerButton = tk.Button(self.topFrame, text = "Annuleer", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.hide)
+		self.buttonA = tk.Button(self.topFrame, text = "Dit station", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold")
+		self.buttonB = tk.Button(self.topFrame, text = "Ander station", height = 4, width = 24, background = "#3F47CC", foreground = "#FFFFFF", font = "bold", command = self.open_station_selector)
+
+		self.entry = tk.Entry(self.topFrame, width=50, background="#3F47CC")
+>>>>>>> refs/remotes/origin/master
 
 		self.multiColumnListBox = MultiColumnListBox(self.resultsFrame, ["Bestemming", "Spoor","Tijd"])	
 		self.multiColumnListBox.clear()
@@ -48,6 +56,12 @@ class SearchScreen():
 		
 		self.annuleerButton.pack(pady = 20, padx = (20, 0), side = tk.LEFT)
 		self.buttonA.pack(pady = 20, padx = (20, 0), side = tk.LEFT)
+<<<<<<< HEAD
+=======
+		self.buttonB.pack(pady = 20, padx = (20, 0), side = tk.LEFT)
+
+		self.entry.pack(side=tk.BOTTOM, pady=(0, 20), padx=(20, 20))
+>>>>>>> refs/remotes/origin/master
 
 	def hide(self):
 		self._hide()
